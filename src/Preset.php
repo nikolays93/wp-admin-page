@@ -22,7 +22,7 @@ class Preset
     static function not_set_callback()
     {
         if( WP_DEBUG ) {
-            wp_die( "Callback param not defined! @see more https://github.com/nikolays93/WPAdminPage" );
+            wp_die( "Callback param not defined! @see more https://github.com/NikolayS93/WPAdminPage" );
         }
     }
 

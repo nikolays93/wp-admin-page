@@ -1,14 +1,14 @@
 {
-    "name": "nikolays93/wp-admin-page",
+    "name": "NikolayS93/wp-admin-page",
     "description": "My wordpres admin tool: admin-menu-page",
     "authors": [
         {
-            "name": "nikolays93",
-            "email": "nikolays93@ya.ru"
+            "name": "NikolayS93",
+            "email": "NikolayS93@ya.ru"
         }
     ],
     "autoload": {
-        "psr-4": { "Nikolays93\\WPAdminPage\\": "src/" }
+        "psr-4": { "NikolayS93\\WPAdminPage\\": "src/" }
     },
     "require": {}
 }
