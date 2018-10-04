@@ -4,7 +4,7 @@ namespace NikolayS93\WPAdminPage;
 
 class Callback
 {
-    const ERR = array(
+    private static $ERR = array(
         'E'    => 'Callback is empty',
         'F_NE' => 'Function in not exists',
         'M_E'  => 'Method is empty',
@@ -36,20 +36,20 @@ class Callback
 
     function __construct( $callback = null ) {
         if( !$callback ) {
-            $this->callback['err'][] = self::ERR['E'];
+            $this->callback['err'][] = self::$ERR['E'];
         }
 
         if( is_string($callback) && !function_exists($callback) ) {
-            $this->callback['err'][] = self::ERR['F_NE'];
+            $this->callback['err'][] = self::$ERR['F_NE'];
         }
 
         if( is_array($callback) ) {
             if( !isset($callback[1]) ) {
-                $this->callback['err'][] = self::ERR['M_E'];
+                $this->callback['err'][] = self::$ERR['M_E'];
             }
 
             if( !method_exists($callback[0], $callback[1]) ) {
-                $this->callback['err'][] = self::ERR['M_NE'];
+                $this->callback['err'][] = self::$ERR['M_NE'];
             }
         }
 
