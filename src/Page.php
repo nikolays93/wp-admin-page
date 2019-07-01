@@ -150,8 +150,11 @@ class Page
         add_action( $this->slug . '_inside_normal_container', array($this, 'normal_render'), 10 );
         add_action( $this->slug . '_inside_advanced_container', array($this, 'advanced_render'), 10 );
 
-        do_action('add_meta_boxes_'.$this->wp_screen_name, null);
-        do_action('add_meta_boxes', $this->wp_screen_name, null);
+        $post = new \stdClass();
+        $post = new \WP_Post($post);
+
+        do_action('add_meta_boxes_'.$this->wp_screen_name, $post);
+        do_action('add_meta_boxes', $this->wp_screen_name, $post);
 
         add_screen_option('layout_columns', array(
             'max' => $this->args['columns'],
