@@ -12,51 +12,68 @@
  */
 ```
 
-### How to use: ###
+### How to use:
+
 ```php
 
-use NikolayS93\WPAdminPage as Admin;
+use NikolayS93\WPAdminPage\Page;
 
-function __admin_assets() {
-  // WP Enqueues here..
-}
-
-$page = new Admin\Page(
-    'pageSlug',
-    __('New page', 'my-plugin-domain'),
+$Page = new Page(
+    'example-page',
+    __( 'New example page', DOMAIN ),
     array(
-        'parent'      => false,
-        'icon_url'    => 'dashicons-external',
-        'menu'        => __('Modals', DOMAIN),
+        'parent'      => 'index.php',
+        'menu'        => __( 'New page', DOMAIN ),
         'permissions' => 'manage_options',
         'columns'     => 2,
     )
 );
 
-$page->set_assets( '__admin_assets' );
-
-$page->set_content( function() {
-    echo "Test content";
+$Page->set_content( function () {
+    include __DIR__ . '/admin/template/content.php';
 } );
-
 ```
 
-### Metaboxes: ###
+### Sections:
+
 ```php
-$metabox1 = new Admin\Metabox(
-    'metabox1',
-    __( 'Metabox1', 'my-plugin-domain' ),
-    function() {
-        echo "Metabox 1 content";
-    },
-    $position = 'side',
-    $priority = 'high'
-);
 
-$page->add_metabox( $metabox1 );
+use NikolayS93\WPAdminPage\Section;
+
+$Page->add_section( new Section(
+        'section',
+        __( 'Section', DOMAIN ),
+        __DIR__ . '/admin/template/section.php'
+    )
+);
 ```
 
-### @Hooks: ###
+### Metaboxes:
+
+```php
+
+use NikolayS93\WPAdminPage\Metabox;
+
+$Page->add_metabox( new Metabox(
+    'metabox',
+    __( 'Metabox', DOMAIN ),
+    __DIR__ . '/admin/template/metabox.php',
+    'side',
+    'high'
+) );
+```
+
+### Assets:
+
+```php
+
+$Page->set_assets( function () {
+    wp_enqueue_style( 'domain-admin-page', 'http://new-example-page.css' );
+} );
+```
+
+### @Hooks:
+
     $pageslug . _after_title (default empty hook)
     $pageslug . _before_form_inputs (default empty hook)
     $pageslug . _inside_page_content
